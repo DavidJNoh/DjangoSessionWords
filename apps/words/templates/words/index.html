@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <style>.right {
+            display: inline-block;
+            border-left: 2px black solid;
+            width: 40%;
+            vertical-align: top;
+            min-height: 700px;
+            }
+            .left{
+                width: 40%;
+            display: inline-block;
+            }
+            #bigbig{
+                font-weight: bolder;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="left">
+            <h1>Add a new word</h1>
+            <form action="/process" method="post">
+                {% csrf_token %}
+                <input type="text" name="wordname" style="width: 75%; display: block;">
+                <input type=radio name=colorname value="red">red<br>
+                <input type=radio name=colorname value="green">green<br>
+                <input type=radio name=colorname value="blue">blue<br>
+                <input type="hidden" name="bigfont" value="nobig">
+                <input type="checkbox" name="bigfont" value="bigbig">Gib Big Font<br>                
+                <button style="margin-top: 30px; width: 80px;">Submit</button>
+            </form>
+        </div>
+        <div class="right">
+            <a href="/clear" style="display: block; margin-left: 500px;"><button>Clear Session</button></a>
+            {% for x in request.session.words %}
+            <!-- <p style="color: {{x.colorname}}" id="{{x.bigfont}}}";>{{x.wordname}}{{x.bigfont}}</p> -->
+            {% endfor %}
+        </div>
+    </body>
+</html>
